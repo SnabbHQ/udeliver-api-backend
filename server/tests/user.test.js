@@ -19,7 +19,10 @@ after((done) => {
 
 describe('## User APIs', () => {
   let user = {
+    email: 'k@snabb.io',
     username: 'KK123',
+    firstName: 'Mr',
+    lastName: 'Potato',
     mobileNumber: '1234567890'
   };
 
@@ -72,7 +75,10 @@ describe('## User APIs', () => {
         .send(user)
         .expect(httpStatus.OK)
         .then((res) => {
+          expect(res.body.email).to.equal(user.email);
           expect(res.body.username).to.equal('KK');
+          expect(res.body.firstName).to.equal(user.firstName);
+          expect(res.body.lastName).to.equal(user.lastName);
           expect(res.body.mobileNumber).to.equal(user.mobileNumber);
           done();
         })

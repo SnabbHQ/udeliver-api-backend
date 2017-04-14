@@ -7,9 +7,22 @@ import APIError from '../helpers/APIError';
  * User Schema
  */
 const UserSchema = new mongoose.Schema({
+  email: {
+    type: String,
+    required: true,
+    index: { unique: true }
+  },
   username: {
     type: String,
     required: true
+  },
+  firstName: {
+    type: String,
+    required: false
+  },
+  lastName: {
+    type: String,
+    required: false
   },
   mobileNumber: {
     type: String,
@@ -32,8 +45,7 @@ const UserSchema = new mongoose.Schema({
 /**
  * Methods
  */
-UserSchema.method({
-});
+UserSchema.method({});
 
 /**
  * Statics
@@ -45,15 +57,13 @@ UserSchema.statics = {
    * @returns {Promise<User, APIError>}
    */
   get(id) {
-    return this.findById(id)
-      .exec()
-      .then((user) => {
-        if (user) {
-          return user;
-        }
-        const err = new APIError('No such user exists!', httpStatus.NOT_FOUND);
-        return Promise.reject(err);
-      });
+    return this.findById(id).exec().then((user) => {
+      if (user) {
+        return user;
+      }
+      const err = new APIError('No such user exists!', httpStatus.NOT_FOUND);
+      return Promise.reject(err);
+    });
   },
 
   /**
@@ -62,12 +72,12 @@ UserSchema.statics = {
    * @param {number} limit - Limit number of users to be returned.
    * @returns {Promise<User[]>}
    */
-  list({ skip = 0, limit = 50 } = {}) {
-    return this.find()
-      .sort({ createdAt: -1 })
-      .skip(+skip)
-      .limit(+limit)
-      .exec();
+  list({
+    skip = 0,
+    limit = 50
+  } = {}) {
+    return this.find().sort({ createdAt: -1 }).skip(+skip).limit(+limit)
+    .exec();
   }
 };
 
