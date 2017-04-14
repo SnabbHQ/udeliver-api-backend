@@ -5,8 +5,6 @@ export default {
   createUser: {
     body: {
       email: Joi.string().email().required(),
-      username: Joi.string().alphanum().min(3).max(30)
-      .required(),
       firstName: Joi.string().optional(),
       lastName: Joi.string().optional(),
       mobileNumber: Joi.string().regex(/^[1-9][0-9]{9}$/).required()
@@ -16,9 +14,9 @@ export default {
   // UPDATE /api/users/:userId
   updateUser: {
     body: {
-      username: Joi.string().required(),
-      firstName: Joi.string().required(),
-      lastName: Joi.string().required(),
+      email: Joi.string().email().required(),
+      firstName: Joi.string().optional(),
+      lastName: Joi.string().optional(),
       mobileNumber: Joi.string().regex(/^[1-9][0-9]{9}$/).required()
     },
     params: {
@@ -26,10 +24,43 @@ export default {
     }
   },
 
+  // POST /api/agents
+  createAgent: {
+    body: {
+      email: Joi.string().email().required(),
+      firstName: Joi.string().optional(),
+      lastName: Joi.string().optional(),
+      mobileNumber: Joi.string().regex(/^[1-9][0-9]{9}$/).required(),
+      transportType: Joi.string().required().valid('car', 'motorcycle', 'bicycle', 'scooter', 'foot', 'truck'),
+      transportDesc: Joi.string().optional(),
+      licensePlate: Joi.string().optional(),
+      color: Joi.string().optional(),
+      teamId: Joi.string().hex().required()
+    }
+  },
+
+  // UPDATE /api/agents/:agentId
+  updateAgent: {
+    body: {
+      email: Joi.string().email().required(),
+      firstName: Joi.string().optional(),
+      lastName: Joi.string().optional(),
+      mobileNumber: Joi.string().regex(/^[1-9][0-9]{9}$/).required(),
+      transportType: Joi.string().required().valid('car', 'motorcycle', 'bicycle', 'scooter', 'foot', 'truck'),
+      transportDesc: Joi.string().optional(),
+      licensePlate: Joi.string().optional(),
+      color: Joi.string().optional(),
+      teamId: Joi.string().hex().required()
+    },
+    params: {
+      agentId: Joi.string().hex().required()
+    }
+  },
+
   // POST /api/auth/login
   login: {
     body: {
-      username: Joi.string().required(),
+      email: Joi.string().email().required(),
       password: Joi.string().required()
     }
   }

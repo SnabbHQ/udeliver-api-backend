@@ -20,7 +20,7 @@ function get(req, res) {
 
 /**
  * Create new user
- * @property {string} req.body.username - The username of user.
+ * @property {string} req.body.email - The email of user.
  * @property {string} req.body.firstName - The first name of user.
  * @property {string} req.body.lastName - The last name of user.
  * @property {string} req.body.mobileNumber - The mobileNumber of user.
@@ -29,7 +29,6 @@ function get(req, res) {
 function create(req, res, next) {
   const user = new User({
     email: req.body.email,
-    username: req.body.username,
     firstName: req.body.firstName,
     lastName: req.body.lastName,
     mobileNumber: req.body.mobileNumber
@@ -41,7 +40,6 @@ function create(req, res, next) {
 /**
  * Update existing user
  * @property {string} req.body.email - The email of user.
- * @property {string} req.body.username - The username of user.
  * @property {string} req.body.firstName - The first name of user.
  * @property {string} req.body.lastName - The last name of user.
  * @property {string} req.body.mobileNumber - The mobileNumber of user.
@@ -50,7 +48,6 @@ function create(req, res, next) {
 function update(req, res, next) {
   const user = req.user;
   user.email = req.body.email;
-  user.username = req.body.username;
   user.firstName = req.body.firstName;
   user.lastName = req.body.lastName;
   user.mobileNumber = req.body.mobileNumber;

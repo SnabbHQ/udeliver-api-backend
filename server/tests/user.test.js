@@ -20,7 +20,6 @@ after((done) => {
 describe('## User APIs', () => {
   let user = {
     email: 'k@snabb.io',
-    username: 'KK123',
     firstName: 'Mr',
     lastName: 'Potato',
     mobileNumber: '1234567890'
@@ -33,7 +32,9 @@ describe('## User APIs', () => {
         .send(user)
         .expect(httpStatus.OK)
         .then((res) => {
-          expect(res.body.username).to.equal(user.username);
+          expect(res.body.email).to.equal(user.email);
+          expect(res.body.firstName).to.equal(user.firstName);
+          expect(res.body.lastName).to.equal(user.lastName);
           expect(res.body.mobileNumber).to.equal(user.mobileNumber);
           user = res.body;
           done();
@@ -48,7 +49,9 @@ describe('## User APIs', () => {
         .get(`/api/users/${user._id}`)
         .expect(httpStatus.OK)
         .then((res) => {
-          expect(res.body.username).to.equal(user.username);
+          expect(res.body.email).to.equal(user.email);
+          expect(res.body.firstName).to.equal(user.firstName);
+          expect(res.body.lastName).to.equal(user.lastName);
           expect(res.body.mobileNumber).to.equal(user.mobileNumber);
           done();
         })
@@ -69,14 +72,13 @@ describe('## User APIs', () => {
 
   describe('# PUT /api/users/:userId', () => {
     it('should update user details', (done) => {
-      user.username = 'KK';
+      user.email = 'k1@snabb.io';
       request(app)
         .put(`/api/users/${user._id}`)
         .send(user)
         .expect(httpStatus.OK)
         .then((res) => {
-          expect(res.body.email).to.equal(user.email);
-          expect(res.body.username).to.equal('KK');
+          expect(res.body.email).to.equal('k1@snabb.io');
           expect(res.body.firstName).to.equal(user.firstName);
           expect(res.body.lastName).to.equal(user.lastName);
           expect(res.body.mobileNumber).to.equal(user.mobileNumber);
@@ -117,7 +119,9 @@ describe('## User APIs', () => {
         .delete(`/api/users/${user._id}`)
         .expect(httpStatus.OK)
         .then((res) => {
-          expect(res.body.username).to.equal('KK');
+          expect(res.body.email).to.equal('k1@snabb.io');
+          expect(res.body.firstName).to.equal(user.firstName);
+          expect(res.body.lastName).to.equal(user.lastName);
           expect(res.body.mobileNumber).to.equal(user.mobileNumber);
           done();
         })
