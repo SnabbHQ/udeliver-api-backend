@@ -22,7 +22,8 @@
     "test:watch": "yarn test -- --watch",
     "test:coverage": "cross-env NODE_ENV=test ./node_modules/.bin/istanbul cover _mocha -- --ui bdd --reporter spec --colors --compilers js:babel-core/register server/tests --recursive",
     "test:check-coverage": "yarn test:coverage && istanbul check-coverage",
-    "report-coverage": "coveralls < ./coverage/lcov.info"
+    "report-coverage": "coveralls < ./coverage/lcov.info",
+    "help": "echo 'Everything under babel-cli should be in devDependencies but for the sake of getting Heroku working right now, we need to put them underthe dependencies instead.'"
   },
   "repository": {
     "type": "git",
@@ -62,9 +63,8 @@
     "morgan": "1.7.0",
     "passport": "0.3.2",
     "passport-oauth": "1.0.0",
-    "winston": "2.3.0"
-  },
-  "devDependencies": {
+    "winston": "2.3.0",
+
     "babel-cli": "6.18.0",
     "babel-core": "6.18.0",
     "babel-plugin-add-module-exports": "0.2.1",
@@ -94,6 +94,8 @@
     "supertest": "2.0.1",
     "supertest-as-promised": "4.0.2",
     "validate-commit-msg": "^2.6.1"
+  },
+  "devDependencies": {
   },
   "license": "MIT",
   "config": {
