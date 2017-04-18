@@ -31,8 +31,8 @@ if (config.MONGOOSE_DEBUG) {
 // src: https://github.com/mochajs/mocha/issues/1912
 if (!module.parent) {
   // listen on port config.port
-  app.listen(process.env.PORT, () => {
-    console.info(`server started on port ${process.env.PORT} (${config.env})`); // eslint-disable-line no-console
+  app.listen(process.env.PORT || config.port, () => {
+    console.info(`server started on port ${process.env.PORT || config.port} (${config.env})`); // eslint-disable-line no-console
   });
 }
 
