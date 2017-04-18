@@ -20,6 +20,16 @@ const AgentSchema = new mongoose.Schema({
     type: String,
     required: false
   },
+  location: {
+    latitude: {
+      type: Number,
+      required: false
+    },
+    longitude: {
+      type: Number,
+      required: false
+    }
+  },
   mobileNumber: {
     type: String,
     required: true,

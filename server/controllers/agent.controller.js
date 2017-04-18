@@ -34,6 +34,7 @@ function get(req, res) {
  * @returns {Agent}
  */
 function create(req, res, next) {
+  console.log(req.body);
   const agent = new Agent({
     email: req.body.email,
     firstName: req.body.firstName,
@@ -42,6 +43,7 @@ function create(req, res, next) {
     transportType: req.body.transportType,
     transportDesc: req.body.transportDesc,
     licensePlate: req.body.licensePlate,
+    location: req.body.location,
     color: req.body.color,
     teamId: req.body.teamId,
   });
@@ -72,6 +74,7 @@ function update(req, res, next) {
   agent.transportType = req.body.transportType;
   agent.transportDesc = req.body.transportDesc;
   agent.licensePlate = req.body.licensePlate;
+  agent.location = req.body.location;
   agent.color = req.body.color;
   agent.teamId = req.body.teamId;
 

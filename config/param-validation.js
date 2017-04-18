@@ -34,6 +34,10 @@ export default {
       transportType: Joi.string().required().valid('car', 'motorcycle', 'bicycle', 'scooter', 'foot', 'truck'),
       transportDesc: Joi.string().optional(),
       licensePlate: Joi.string().optional(),
+      location: Joi.object({
+        latitude: Joi.number().required(),
+        longitude: Joi.number().required(),
+      }),
       color: Joi.string().optional(),
       teamId: Joi.string().hex().required()
     }
@@ -49,6 +53,10 @@ export default {
       transportType: Joi.string().required().valid('car', 'motorcycle', 'bicycle', 'scooter', 'foot', 'truck'),
       transportDesc: Joi.string().optional(),
       licensePlate: Joi.string().optional(),
+      location: Joi.object({
+        latitude: Joi.number().required(),
+        longitude: Joi.number().required(),
+      }),
       color: Joi.string().optional(),
       teamId: Joi.string().hex().required()
     },
