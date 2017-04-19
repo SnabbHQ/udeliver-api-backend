@@ -20,7 +20,9 @@ function auth(req, res, next) {
     }
   };
   const authToken = pusher.authenticate(socketId, channel, presenceData);
-  res.send(authToken);
+  if (authToken) {
+    return res.send(authToken);
+  }
 
   const err = new APIError('Authentication error', httpStatus.UNAUTHORIZED, true);
   return next(err);
@@ -32,9 +34,8 @@ function auth(req, res, next) {
  * @param req
  * @param res
  * @param next
- * @property {number} req.body.timeMs - The name of private channel. This value can
- * be either channel_occupied or channel_vacated.
- * @property {string} req.body.channel - The channel name itself (ex. private-{userId})
+ * @property {number} req.body.time_ms - Time in ms of when the event ocurred.
+ * @property {array} req.body.events - An array of events given by pusher.
  * @returns {*}
  */
 function onDuty(req, res) {
