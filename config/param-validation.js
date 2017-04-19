@@ -81,14 +81,6 @@ export default {
     }
   },
 
-  // "time_ms": 1492611595838,
-  //   "events": [
-  //       {
-  //           "channel": "private-1234",
-  //           "name": "channel_vacated"
-  //       }
-  //   ]
-
   // POST /api/pusher/onDuty
   pusherOnDuty: {
     body: {

@@ -12,8 +12,12 @@ import pusher from '../../config/pusher';
 function auth(req, res, next) {
   const socketId = req.body.socket_id;
   const channel = req.body.channel_name;
+
+  // const userId = channel.split('-').pop();
+  // winston.debug(userId);
+
   const presenceData = {
-    user_id: 'unique_user_id',
+    user_id: '58f5f7fa95328cb375975a09',
     user_info: {
       name: 'Mr Pusher',
       twitter_id: '@pusher'
@@ -41,6 +45,13 @@ function auth(req, res, next) {
 function onDuty(req, res) {
   const timeMs = req.body.time_ms;
   const events = req.body.events;
+
+  // Here we should do the following:
+  // 1. Parse the events[0].channel to find out the id of the agent onDuty
+  // 2. Check if the events[0].name is either channel_vacated or channel_occupied
+  // for that specific user.
+  // 3. Update in the DB the onDuty state of the user
+  // 4. Trigger an event in which lists all the agents online at the moment.
 
   return res.json({
     timeMs,
