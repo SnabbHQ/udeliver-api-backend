@@ -1,5 +1,5 @@
 import Pusher from 'pusher';
-import Agent from '../models/agent.model';
+import Agent from './agent.model';
 
 const pusher = new Pusher({
   appId: '328861',
