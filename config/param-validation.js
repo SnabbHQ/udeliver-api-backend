@@ -80,4 +80,12 @@ export default {
       channel_name: Joi.string().required()
     }
   },
+
+  // POST /api/pusher/onDuty
+  pusherOnDuty: {
+    body: {
+      name: Joi.string().required().valid('channel_vacated', 'channel_occupied'),
+      channel: Joi.string().required()
+    }
+  },
 };

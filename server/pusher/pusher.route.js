@@ -9,4 +9,9 @@ const router = express.Router(); // eslint-disable-line new-cap
 router.route('/auth')
   .post(validate(paramValidation.pusherAuth), pusherCtrl.auth);
 
+/** POST /api/pusher/onDuty - Register a Channel Presence for each of the workers
+to figure out who is onDury and who is not  */
+router.route('/onDuty')
+  .post(validate(paramValidation.pusherOnDuty), pusherCtrl.onDuty);
+
 export default router;

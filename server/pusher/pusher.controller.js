@@ -26,4 +26,25 @@ function auth(req, res, next) {
   return next(err);
 }
 
-export default { auth };
+/**
+ * Webhook endpoint for pusher to notify if a certain channel becomes available
+ * or not. This way we can track if a certain worker goes onDuty or not.
+ * @param req
+ * @param res
+ * @param next
+ * @property {string} req.body.name - The name of private channel. This value can
+ * be either channel_occupied or channel_vacated.
+ * @property {string} req.body.channel - The channel name itself (ex. private-{userId})
+ * @returns {*}
+ */
+function onDuty(req, res) {
+  const name = req.body.name;
+  const channel = req.body.channel;
+
+  return res.json({
+    name,
+    channel
+  });
+}
+
+export default { auth, onDuty };
