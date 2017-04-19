@@ -1,7 +1,8 @@
 import express from 'express';
-import userRoutes from './user/user.route';
 import agentRoutes from './agent/agent.route';
 import authRoutes from './auth/auth.route';
+import pusherRoutes from './pusher/pusher.route';
+import userRoutes from './user/user.route';
 
 const router = express.Router(); // eslint-disable-line new-cap
 
@@ -18,5 +19,8 @@ router.use('/agents', agentRoutes);
 
 // mount auth routes at /auth
 router.use('/auth', authRoutes);
+
+// mount pusher routes at /pusher
+router.use('/pusher', pusherRoutes);
 
 export default router;

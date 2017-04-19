@@ -71,5 +71,13 @@ export default {
       email: Joi.string().email().required(),
       password: Joi.string().required()
     }
-  }
+  },
+
+  // POST /api/pusher/auth
+  pusherAuth: {
+    body: {
+      socket_id: Joi.string().required(),
+      channel_name: Joi.string().required()
+    }
+  },
 };
