@@ -32,18 +32,18 @@ function auth(req, res, next) {
  * @param req
  * @param res
  * @param next
- * @property {string} req.body.name - The name of private channel. This value can
+ * @property {number} req.body.timeMs - The name of private channel. This value can
  * be either channel_occupied or channel_vacated.
  * @property {string} req.body.channel - The channel name itself (ex. private-{userId})
  * @returns {*}
  */
 function onDuty(req, res) {
-  const name = req.body.name;
-  const channel = req.body.channel;
+  const timeMs = req.body.time_ms;
+  const events = req.body.events;
 
   return res.json({
-    name,
-    channel
+    timeMs,
+    events
   });
 }
 

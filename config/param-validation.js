@@ -81,11 +81,22 @@ export default {
     }
   },
 
+  // "time_ms": 1492611595838,
+  //   "events": [
+  //       {
+  //           "channel": "private-1234",
+  //           "name": "channel_vacated"
+  //       }
+  //   ]
+
   // POST /api/pusher/onDuty
   pusherOnDuty: {
     body: {
-      name: Joi.string().required().valid('channel_vacated', 'channel_occupied'),
-      channel: Joi.string().required()
+      time_ms: Joi.number().optional(),
+      events: Joi.array().items({
+        channel: Joi.string().required(),
+        name: Joi.string().required().valid('channel_vacated', 'channel_occupied'),
+      }),
     }
   },
 };
