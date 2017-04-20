@@ -5,7 +5,7 @@ export default {
   createTask: {
     body: {
       comments: Joi.string().optional(),
-      type: Joi.string().optional().valid('pickup', 'dropoff'),
+      type: Joi.string().required().valid('pickup', 'dropoff'),
     }
   },
 
@@ -13,7 +13,7 @@ export default {
   updateTask: {
     body: {
       comments: Joi.string().optional(),
-      type: Joi.string().optional().valid('pickup', 'dropoff'),
+      type: Joi.string().required().valid('pickup', 'dropoff'),
     },
     params: {
       taskId: Joi.string().hex().required()
