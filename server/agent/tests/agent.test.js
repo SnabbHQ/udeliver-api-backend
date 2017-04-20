@@ -68,7 +68,9 @@ describe('## Agent APIs', () => {
         .get('/api/agents/56c787ccc67fc16ccc1a5e92')
         .expect(httpStatus.NOT_FOUND)
         .then((res) => {
-          expect(res.body.message).to.equal('Not Found');
+          expect(res.body.code).to.exist;
+          expect(res.body.key).to.exist;
+          expect(res.body.message).to.exist;
           done();
         })
         .catch(done);

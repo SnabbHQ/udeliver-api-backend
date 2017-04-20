@@ -1,7 +1,6 @@
 import Promise from 'bluebird';
 import mongoose from 'mongoose';
-import httpStatus from 'http-status';
-import APIError from '../helpers/APIError';
+import APIResponse from '../utils/APIResponse';
 
 /**
  * User Schema
@@ -57,7 +56,7 @@ UserSchema.statics = {
       if (user) {
         return user;
       }
-      const err = new APIError('No such user exists!', httpStatus.NOT_FOUND);
+      const err = APIResponse.userNotFound();
       return Promise.reject(err);
     });
   },

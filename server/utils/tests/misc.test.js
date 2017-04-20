@@ -25,34 +25,9 @@ describe('## Misc', () => {
         .get('/api/404')
         .expect(httpStatus.NOT_FOUND)
         .then((res) => {
-          expect(res.body.message).to.equal('Not Found');
-          done();
-        })
-        .catch(done);
-    });
-  });
-
-  describe('# Error Handling', () => {
-    it('should handle mongoose CastError - Cast to ObjectId failed', (done) => {
-      request(app)
-        .get('/api/users/56z787zzz67fc')
-        .expect(httpStatus.INTERNAL_SERVER_ERROR)
-        .then((res) => {
-          expect(res.body.message).to.equal('Internal Server Error');
-          done();
-        })
-        .catch(done);
-    });
-
-    it('should handle express validation error - email and username are required', (done) => {
-      request(app)
-        .post('/api/users')
-        .send({
-          mobileNumber: '1234567890'
-        })
-        .expect(httpStatus.BAD_REQUEST)
-        .then((res) => {
-          expect(res.body.message).to.equal('"email" is required');
+          expect(res.body.code).to.exist;
+          expect(res.body.key).to.exist;
+          expect(res.body.message).to.exist;
           done();
         })
         .catch(done);

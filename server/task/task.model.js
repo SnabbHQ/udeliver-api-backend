@@ -1,7 +1,6 @@
 import Promise from 'bluebird';
 import mongoose from 'mongoose';
-import httpStatus from 'http-status';
-import APIError from '../helpers/APIError';
+import APIResponse from '../utils/APIResponse';
 
 /**
  * Task Schema
@@ -48,7 +47,7 @@ TaskSchema.statics = {
       if (task) {
         return task;
       }
-      const err = new APIError('No such task exists!', httpStatus.NOT_FOUND);
+      const err = APIResponse.taskNotFound();
       return Promise.reject(err);
     });
   },

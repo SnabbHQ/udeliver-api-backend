@@ -1,7 +1,6 @@
 import Promise from 'bluebird';
 import mongoose from 'mongoose';
-import httpStatus from 'http-status';
-import APIError from '../helpers/APIError';
+import APIResponse from '../utils/APIResponse';
 
 /**
  * Team Schema
@@ -48,7 +47,7 @@ TeamSchema.statics = {
       if (team) {
         return team;
       }
-      const err = new APIError('No such team exists!', httpStatus.NOT_FOUND);
+      const err = APIResponse.teamNotFound();
       return Promise.reject(err);
     });
   },

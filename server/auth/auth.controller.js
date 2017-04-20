@@ -1,6 +1,5 @@
 import jwt from 'jsonwebtoken';
-import httpStatus from 'http-status';
-import APIError from '../helpers/APIError';
+import APIResponse from '../utils/APIResponse';
 import config from '../../config/config';
 
 // sample user, used for authentication
@@ -29,7 +28,7 @@ function login(req, res, next) {
     });
   }
 
-  const err = new APIError('Authentication error', httpStatus.UNAUTHORIZED, true);
+  const err = APIResponse.unAuthorized();
   return next(err);
 }
 

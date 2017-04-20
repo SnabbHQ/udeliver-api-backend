@@ -1,7 +1,6 @@
 import Promise from 'bluebird';
 import mongoose from 'mongoose';
-import httpStatus from 'http-status';
-import APIError from '../helpers/APIError';
+import APIResponse from '../utils/APIResponse';
 
 /**
  * Agent Schema
@@ -88,8 +87,8 @@ AgentSchema.statics = {
       if (agent) {
         return agent;
       }
-      const err = new APIError('No such agent exists!', httpStatus.NOT_FOUND);
-      return Promise.reject(err);
+
+      return Promise.reject(APIResponse.agentNotFound());
     });
   },
 

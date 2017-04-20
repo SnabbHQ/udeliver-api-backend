@@ -12,7 +12,8 @@ import helmet from 'helmet';
 import winstonInstance from './winston';
 import routes from '../server/index.route';
 import config from './config';
-import APIError from '../server/helpers/APIError';
+import APIError from '../server/utils/APIError';
+import APIResponse from '../server/utils/APIResponse';
 
 const app = express();
 
@@ -54,20 +55,17 @@ app.use((err, req, res, next) => {
   if (err instanceof expressValidation.ValidationError) {
     // validation error contains errors which is an array of error each containing message[]
     const unifiedErrorMessage = err.errors.map(error => error.messages.join('. ')).join(' and ');
-    const error = new APIError(unifiedErrorMessage, err.status, true);
+    const error = APIResponse.invalidRequest(unifiedErrorMessage);
     return next(error);
   } else if (!(err instanceof APIError)) {
-    const apiError = new APIError(err.message, err.status, err.isPublic);
+    const apiError = new APIError(err.code, err.key, err.message, err.status, err.isPublic);
     return next(apiError);
   }
   return next(err);
 });
 
 // catch 404 and forward to error handler
-app.use((req, res, next) => {
-  const err = new APIError('API not found', httpStatus.NOT_FOUND);
-  return next(err);
-});
+app.use((req, res, next) => next(APIResponse.apiNotFound()));
 
 // log error in winston transports except when executing test suite
 if (config.env !== 'test') {
@@ -79,6 +77,8 @@ if (config.env !== 'test') {
 // error handler, send stacktrace only during development
 app.use((err, req, res, next) => // eslint-disable-line no-unused-vars
   res.status(err.status).json({
+    code: err.code,
+    key: err.key,
     message: err.isPublic ? err.message : httpStatus[err.status],
     stack: config.env === 'development' ? err.stack : {}
   })

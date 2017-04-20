@@ -1,5 +1,5 @@
 import httpStatus from 'http-status';
-import APIError from '../helpers/APIError';
+import APIError from '../utils/APIError';
 import pusher from '../../config/pusher';
 
 /**
