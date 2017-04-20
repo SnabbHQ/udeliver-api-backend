@@ -72,9 +72,9 @@ function list(req, res, next) {
  * @returns {Task}
  */
 function remove(req, res, next) {
-  const task = req.Task;
+  const task = req.task;
   task.remove()
-  .then(deletedTask => res.json(deletedTask))
+  .then(res.send('OK'))
   .catch(e => next(e));
 }
 
