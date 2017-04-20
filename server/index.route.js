@@ -2,6 +2,7 @@ import express from 'express';
 import agentRoutes from './agent/agent.route';
 import authRoutes from './auth/auth.route';
 import pusherRoutes from './pusher/pusher.route';
+import taskRoutes from './task/task.route';
 import userRoutes from './user/user.route';
 
 const router = express.Router(); // eslint-disable-line new-cap
@@ -11,9 +12,6 @@ router.get('/health-check', (req, res) =>
   res.send('OK')
 );
 
-// mount user routes at /users
-router.use('/users', userRoutes);
-
 // mount agents routes at /agents
 router.use('/agents', agentRoutes);
 
@@ -22,5 +20,11 @@ router.use('/auth', authRoutes);
 
 // mount pusher routes at /pusher
 router.use('/pusher', pusherRoutes);
+
+// mount tasks routes at /tasks
+router.use('/tasks', taskRoutes);
+
+// mount user routes at /users
+router.use('/users', userRoutes);
 
 export default router;
