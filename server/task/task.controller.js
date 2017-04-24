@@ -1,4 +1,5 @@
 import Task from './task.model';
+import webSocket from '../../config/websocket';
 
 /**
  * Load Task and append to req.
@@ -31,7 +32,8 @@ function create(req, res, next) {
   });
 
   task.save()
-  .then(savedTask => res.json(savedTask))
+  .then((savedTask) => { res.json(savedTask); return savedTask; })
+  .then(savedTask => webSocket.trigger('tasks', 'new-task', { task: savedTask }))
   .catch(e => next(e));
 }
 

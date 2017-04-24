@@ -1,5 +1,5 @@
 import Agent from './agent.model';
-import pusher from '../../config/pusher';
+import webSocket from '../../config/websocket';
 
 /**
  * Load agent and append to req.
@@ -80,7 +80,7 @@ function update(req, res, next) {
 
   agent.save()
   .then(savedAgent => res.json(savedAgent))
-  .then(() => pusher.trigger('agent_location_channel', 'location-update', { location: agent.location }))
+  .then(() => webSocket.trigger('agent_location_channel', 'location-update', { location: agent.location }))
   .catch(e => next(e));
 }
 

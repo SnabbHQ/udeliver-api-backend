@@ -1,6 +1,6 @@
 import httpStatus from 'http-status';
 import APIError from '../utils/APIError';
-import pusher from '../../config/pusher';
+import websocket from '../../config/websocket';
 
 /**
  * Returns pusher token if valid socke_id and channel
@@ -23,7 +23,7 @@ function auth(req, res, next) {
       twitter_id: '@pusher'
     }
   };
-  const authToken = pusher.authenticate(socketId, channel, presenceData);
+  const authToken = websocket.authenticate(socketId, channel, presenceData);
   if (authToken) {
     return res.send(authToken);
   }
