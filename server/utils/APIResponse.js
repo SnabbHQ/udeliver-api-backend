@@ -45,9 +45,19 @@ class APIResponse {
     );
   }
 
-  static taskNotFound() {
+  static organizationNotFound() {
     return new APIError(
         404002,
+        'ORGANIZATION_NOT_FOUND',
+        'No such organization exists',
+        httpStatus.NOT_FOUND,
+        true
+    );
+  }
+
+  static taskNotFound() {
+    return new APIError(
+        404003,
         'TASK_NOT_FOUND',
         'No such task exists',
         httpStatus.NOT_FOUND,
@@ -57,7 +67,7 @@ class APIResponse {
 
   static teamNotFound() {
     return new APIError(
-        404003,
+        404004,
         'TEAM_NOT_FOUND',
         'No such team exists',
         httpStatus.NOT_FOUND,
@@ -67,7 +77,7 @@ class APIResponse {
 
   static userNotFound() {
     return new APIError(
-        404004,
+        404005,
         'USER_NOT_FOUND',
         'No such user exists',
         httpStatus.NOT_FOUND,
